@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Sockets;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class CameraController : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class CameraController : MonoBehaviour
     private float m_rotationSpeed = 1.0f;
     [SerializeField]
     private Vector2 m_clampingXRotationValues = Vector2.zero;
+    [SerializeField]
+    private float m_maxCameraDistance = 10.0f;
+    [SerializeField]
+    private float m_minCameraDistance = 1.0f;
 
     // Update is called once per frame
     void Update()
@@ -53,11 +58,13 @@ public class CameraController : MonoBehaviour
     {
         if (Input.mouseScrollDelta.y != 0)
         {
-            //TODO: Faire une vérification selon la distance la plus proche ou la plus éloignée
-            //Que je souhaite entre ma caméra et mon objet
-
-            //TODO: Lerp plutôt que d'effectuer immédiatement la translation
-            transform.Translate(Vector3.forward * Input.mouseScrollDelta.y, Space.Self);
+            if (CalculateDistance(transform.position, m_objectToLookAt.position) < m_maxCameraDistance
+                && CalculateDistance(transform.position, m_objectToLookAt.position) > m_minCameraDistance)
+            {
+                //TODO: Lerp plutôt que d'effectuer immédiatement la translation
+                transform.Translate(Vector3.forward * Input.mouseScrollDelta.y, Space.Self);
+                ClampPosition();
+            }
         }
     }
 
@@ -87,5 +94,28 @@ public class CameraController : MonoBehaviour
             angle -= 360;
         }
         return angle;
+    }
+
+    private float CalculateDistance(Vector3 playerPosition, Vector3 cameraPosition)
+    {
+        float xDiff = cameraPosition.x - playerPosition.x;
+        float yDiff = cameraPosition.y - playerPosition.y;
+        float zDiff = cameraPosition.z - playerPosition.z;
+
+        float distance = Mathf.Sqrt(Mathf.Pow(xDiff,2) + Mathf.Pow(yDiff,2) + Mathf.Pow(zDiff,2));
+
+        return distance;
+    }
+
+    private void ClampPosition()
+    {
+        if (CalculateDistance(transform.position, m_objectToLookAt.position) >= m_maxCameraDistance)
+        {
+            transform.Translate(Vector3.forward);
+        }
+        else if(CalculateDistance(transform.position, m_objectToLookAt.position) <= m_minCameraDistance)
+        {
+            transform.Translate(Vector3.back);
+        }
     }
 }
