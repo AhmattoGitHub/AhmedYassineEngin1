@@ -49,7 +49,7 @@ public class FreeState : CharacterState
 
     public override bool CanEnter()
     {
-        return true;    
+        return m_stateMachine.IsInContactWithFloor();    
     }
 
     public override bool CanExit()
