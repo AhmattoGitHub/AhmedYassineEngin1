@@ -12,21 +12,31 @@ public class CharacterState : IState
     }
     public virtual void OnEnter()
     {
-        throw new System.NotImplementedException();
+
     }
 
     public virtual void OnExit()
     {
-        throw new System.NotImplementedException();
+
     }
 
     public virtual void OnFixedUpdate()
     {
-        throw new System.NotImplementedException();
+
     }
 
     public virtual void OnUpdate()
     {
-        throw new System.NotImplementedException();
+
+    }
+
+    public virtual bool CanEnter()
+    {
+        return true;
+    }
+
+    public virtual bool CanExit()
+    {
+        return true;
     }
 }

@@ -1,17 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FreeState : CharacterState
 {
     public override void OnEnter()
     {
-
+        Debug.Log("Enter state: FreeState\n");
     }
 
     public override void OnExit()
     {
-
+        Debug.Log("Exit state: FreeState\n");
     }
 
     public override void OnFixedUpdate() 
@@ -34,7 +35,6 @@ public class FreeState : CharacterState
             m_stateMachine.Rigidbody.velocity = m_stateMachine.Rigidbody.velocity.normalized;
             m_stateMachine.Rigidbody.velocity *= m_stateMachine.MaxVelocity;
         }
-        Debug.Log(m_stateMachine.Rigidbody.velocity.magnitude);
 
         //TODO
         //Add movements in all directions
@@ -45,5 +45,15 @@ public class FreeState : CharacterState
     public override void OnUpdate()
     {
 
+    }
+
+    public override bool CanEnter()
+    {
+        return true;    
+    }
+
+    public override bool CanExit()
+    {
+        return true;
     }
 }
