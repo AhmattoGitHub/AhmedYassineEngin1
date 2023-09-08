@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -521,7 +521,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <AccelerationValue>k__BackingField: 10
   <MaxVelocity>k__BackingField: 8
-  <JumpIntensity>k__BackingField: 1000
+  m_floorTrigger: {fileID: 2023825935}
+  <JumpIntensity>k__BackingField: 500
 --- !u!54 &478337657
 Rigidbody:
   m_ObjectHideFlags: 0
