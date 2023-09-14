@@ -36,6 +36,8 @@ public class FreeState : CharacterState
             m_stateMachine.Rigidbody.velocity *= m_stateMachine.MaxVelocity;
         }
 
+        float forwardComponent = Vector3.Dot(m_stateMachine.Rigidbody.velocity, vectorOnFloor);
+        m_stateMachine.UpdateAnimatorValues(new Vector2(0, forwardComponent));
         //TODO
         //Add movements in all directions
         //Have different max speeds on the sides and front/behind
