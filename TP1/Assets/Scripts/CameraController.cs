@@ -16,7 +16,7 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private float m_maxCameraDistance = 10.0f;
     [SerializeField]
-    private float m_minCameraDistance = 1.0f;
+    private float m_minCameraDistance = 3.0f;
 
     // Update is called once per frame
     void Update()
@@ -63,6 +63,9 @@ public class CameraController : MonoBehaviour
             {
                 //TODO: Lerp plutôt que d'effectuer immédiatement la translation
                 transform.Translate(Vector3.forward * Input.mouseScrollDelta.y, Space.Self);
+            }
+            else
+            {
                 ClampPosition();
             }
         }
