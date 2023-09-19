@@ -30,6 +30,14 @@ public class FreeState : CharacterState
             m_stateMachine.Rigidbody.AddForce(-vectorOnFloor * m_stateMachine.AccelerationValue, ForceMode.Acceleration);
 
         }
+        if (Input.GetKey(KeyCode.D))
+        {
+            m_stateMachine.Rigidbody.AddForce(new Vector3(1,0,0) * m_stateMachine.AccelerationValue, ForceMode.Acceleration);
+        }
+        if(Input.GetKey(KeyCode.A))
+        {
+            m_stateMachine.Rigidbody.AddForce(new Vector3(-1, 0, 0) * m_stateMachine.AccelerationValue, ForceMode.Acceleration);
+        }
         if (m_stateMachine.Rigidbody.velocity.magnitude > m_stateMachine.MaxVelocity)
         {
             m_stateMachine.Rigidbody.velocity = m_stateMachine.Rigidbody.velocity.normalized;
@@ -37,7 +45,8 @@ public class FreeState : CharacterState
         }
 
         float forwardComponent = Vector3.Dot(m_stateMachine.Rigidbody.velocity, vectorOnFloor);
-        m_stateMachine.UpdateAnimatorValues(new Vector2(0, forwardComponent));
+        float horizontalComponent = m_stateMachine.Rigidbody.velocity.x;
+        m_stateMachine.UpdateAnimatorValues(new Vector2(horizontalComponent, forwardComponent));
         //TODO
         //Add movements in all directions
         //Have different max speeds on the sides and front/behind
