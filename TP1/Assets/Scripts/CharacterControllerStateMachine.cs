@@ -29,6 +29,7 @@ public class CharacterControllerStateMachine : MonoBehaviour
         m_possibleStates = new List<CharacterState>();
         m_possibleStates.Add(new FreeState());
         m_possibleStates.Add(new JumpState());
+        m_possibleStates.Add(new AttackingState());
     }
     // Start is called before the first frame update
     void Start()
@@ -85,7 +86,7 @@ public class CharacterControllerStateMachine : MonoBehaviour
         return m_floorTrigger.IsOnFloor;
     }
 
-    public void UpdateAnimatorValues(Vector2 movementVecValue)
+    public void UpdateFreeStateAnimatorValues(Vector2 movementVecValue)
     {
         //Get current speed
         //Communicate with animator
