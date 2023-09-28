@@ -24,12 +24,14 @@ public class CharacterControllerStateMachine : MonoBehaviour
     [field:SerializeField]
     public float JumpIntensity { get; private set; }
 
+    public bool m_isHit;
     private void Awake()
     {
         m_possibleStates = new List<CharacterState>();
         m_possibleStates.Add(new FreeState());
         m_possibleStates.Add(new JumpState());
         m_possibleStates.Add(new AttackingState());
+        m_possibleStates.Add(new HitState());
     }
     // Start is called before the first frame update
     void Start()

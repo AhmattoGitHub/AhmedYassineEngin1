@@ -1507,10 +1507,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_objectToLookAt: {fileID: 2222071940475239950}
-  m_rotationSpeed: 1
+  m_rotationSpeedX: 0.01
+  m_rotationSpeedY: 1
   m_clampingXRotationValues: {x: -5, y: 70}
   m_maxCameraDistance: 10
-  m_minCameraDistance: 2
+  m_minCameraDistance: 3
 --- !u!1 &1177489186637486719
 GameObject:
   m_ObjectHideFlags: 0
@@ -10621,6 +10622,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6617979157634296844}
   - component: {fileID: 8593049865847344444}
+  - component: {fileID: 1940893397820989680}
   m_Layer: 0
   m_Name: CharacterController
   m_TagString: Untagged
@@ -10658,9 +10660,30 @@ MonoBehaviour:
   <Rigidbody>k__BackingField: {fileID: 5433229072615005077}
   <Animator>k__BackingField: {fileID: 4107330834361534903}
   <AccelerationValue>k__BackingField: 10
-  <MaxVelocity>k__BackingField: 8
+  <MaxVelocity>k__BackingField: 5
   m_floorTrigger: {fileID: 956591023183427003}
   <JumpIntensity>k__BackingField: 500
+--- !u!65 &1940893397820989680
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7497752884966937149}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7521418404241874872
 GameObject:
   m_ObjectHideFlags: 0
@@ -12745,7 +12768,7 @@ GameObject:
   - component: {fileID: 5433229072615005077}
   m_Layer: 0
   m_Name: C01
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
