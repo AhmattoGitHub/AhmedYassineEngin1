@@ -9,11 +9,14 @@ public class JumpState : CharacterState
 
         m_stateMachine.Rigidbody.AddForce(Vector3.up * m_stateMachine.JumpIntensity, ForceMode.Acceleration);
         m_currentStateTimer = STATE_EXIT_TIMER;
+
+        m_stateMachine.Animator.SetBool("IsJumping", true);
     }
 
     public override void OnExit()
     {
         Debug.Log("Exit state: JumpState\n");
+        m_stateMachine.Animator.SetBool("IsJumping", false);
     }
 
     public override void OnFixedUpdate()

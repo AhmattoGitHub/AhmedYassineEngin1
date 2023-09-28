@@ -24,11 +24,19 @@ public class CharacterControllerStateMachine : MonoBehaviour
     [field:SerializeField]
     public float JumpIntensity { get; private set; }
 
+    public bool m_isHit;
+    public bool m_isOnFloor;
+    public bool m_isGettingUp= false;
     private void Awake()
     {
         m_possibleStates = new List<CharacterState>();
         m_possibleStates.Add(new FreeState());
         m_possibleStates.Add(new JumpState());
+        m_possibleStates.Add(new AttackingState());
+        m_possibleStates.Add(new HitState());
+        m_possibleStates.Add(new OnGroundState());
+        m_possibleStates.Add(new GettinUpState());
+        m_possibleStates.Add(new FallingState());
     }
     // Start is called before the first frame update
     void Start()
@@ -85,7 +93,7 @@ public class CharacterControllerStateMachine : MonoBehaviour
         return m_floorTrigger.IsOnFloor;
     }
 
-    public void UpdateAnimatorValues(Vector2 movementVecValue)
+    public void UpdateFreeStateAnimatorValues(Vector2 movementVecValue)
     {
         //Get current speed
         //Communicate with animator

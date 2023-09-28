@@ -10,13 +10,20 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private Transform m_objectToLookAt;
     [SerializeField]
-    private float m_rotationSpeed = 1.0f;
+    private float m_rotationSpeedX = 1.0f;
+    [SerializeField]
+    private float m_rotationSpeedY = 1.0f;
     [SerializeField]
     private Vector2 m_clampingXRotationValues = Vector2.zero;
     [SerializeField]
     private float m_maxCameraDistance = 10.0f;
     [SerializeField]
     private float m_minCameraDistance = 3.0f;
+
+    private void Start()
+    {
+
+    }
 
     // Update is called once per frame
     void Update()
@@ -33,13 +40,18 @@ public class CameraController : MonoBehaviour
 
     private void UpdateHorizontalMovements()
     {
-        float currentAngleX = Input.GetAxis("Mouse X") * m_rotationSpeed;
-        transform.RotateAround(m_objectToLookAt.position, m_objectToLookAt.up, currentAngleX);
+        if (Input.GetAxis("Mouse X") != 0)
+        {
+            float currentAngleX = Input.GetAxis("Mouse X") * m_rotationSpeedX;
+            transform.RotateAround(m_objectToLookAt.position, m_objectToLookAt.up, currentAngleX);
+
+            m_objectToLookAt.transform.Rotate(m_objectToLookAt.up, transform.localEulerAngles.y);
+        }
     }
 
     private void UpdateVerticalMovements()
     {
-        float currentAngleY = Input.GetAxis("Mouse Y") * m_rotationSpeed;
+        float currentAngleY = Input.GetAxis("Mouse Y") * m_rotationSpeedY;
         float eulersAngleX = transform.rotation.eulerAngles.x;
 
         float comparisonAngle = eulersAngleX + currentAngleY;
