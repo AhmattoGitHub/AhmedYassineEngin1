@@ -58,9 +58,14 @@ public class FreeState : CharacterState
 
     }
 
-    public override bool CanEnter()
+    public override bool CanEnter(CharacterState currentState)
     {
-        return m_stateMachine.IsInContactWithFloor();    
+        var jumpState = currentState as JumpState;
+        if(jumpState != null)
+        {
+            return m_stateMachine.IsInContactWithFloor();
+        }
+        return false;
     }
 
     public override bool CanExit()
