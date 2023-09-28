@@ -45,7 +45,7 @@ public class FreeState : CharacterState
         }
 
         float forwardComponent = Vector3.Dot(m_stateMachine.Rigidbody.velocity, vectorOnFloor);
-        float horizontalComponent = m_stateMachine.Rigidbody.velocity.x;
+        float horizontalComponent = Input.GetAxis("Horizontal");
         m_stateMachine.UpdateFreeStateAnimatorValues(new Vector2(horizontalComponent, forwardComponent));
         //TODO
         //Add movements in all directions
