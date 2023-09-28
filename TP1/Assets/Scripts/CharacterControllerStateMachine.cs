@@ -36,6 +36,7 @@ public class CharacterControllerStateMachine : MonoBehaviour
         m_possibleStates.Add(new HitState());
         m_possibleStates.Add(new OnGroundState());
         m_possibleStates.Add(new GettinUpState());
+        m_possibleStates.Add(new FallingState());
     }
     // Start is called before the first frame update
     void Start()
