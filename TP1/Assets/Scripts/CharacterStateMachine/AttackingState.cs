@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class AttackingState : CharacterState
 {
-    private float m_attackTimer = 0.15f;
+    private float m_attackTimer = 0.1f;
     public override bool CanEnter()
     {
         return Input.GetMouseButtonDown(0);
