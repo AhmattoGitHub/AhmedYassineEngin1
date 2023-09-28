@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OnGroundState : CharacterState
 {
-    private  float m_getUpTimer = 2.0f;
+    private float m_getUpTimer = 2.0f;
     public override void OnEnter()
     {
 
@@ -15,6 +15,7 @@ public class OnGroundState : CharacterState
         m_stateMachine.Animator.SetBool("CanGetUp", true);
         m_stateMachine.m_isOnFloor = false;
         m_stateMachine.m_isGettingUp = true;
+        m_getUpTimer = 2.0f;
     }
 
     public override void OnFixedUpdate()

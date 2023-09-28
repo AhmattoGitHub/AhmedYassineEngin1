@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class GettinUpState : CharacterState
 {
+    private float m_getUpTimer = 1f;
     public override void OnEnter()
     {
-        m_stateMachine.m_isGettingUp = false;
+
     }
 
     public override void OnExit()
     {
-
+        m_stateMachine.m_isGettingUp = false;
+        m_stateMachine.Animator.SetBool("CanGetUp", false);
+        m_getUpTimer = 1f;
     }
 
     public override void OnFixedUpdate()
@@ -21,7 +24,7 @@ public class GettinUpState : CharacterState
 
     public override void OnUpdate()
     {
-
+        m_getUpTimer -= Time.deltaTime;
     }
 
     public override bool CanEnter()
@@ -31,6 +34,6 @@ public class GettinUpState : CharacterState
 
     public override bool CanExit()
     {
-        return !m_stateMachine.m_isGettingUp;
+        return m_getUpTimer <= 0f;
     }
 }

@@ -12,7 +12,7 @@ public class PlayerCollision : MonoBehaviour
         {
             m_characterControllerScript.m_isHit = true;
             Debug.Log("Player is hit!");
-            m_characterControllerScript.Rigidbody.AddForce(Vector3.back * RECOIL_FORCE, ForceMode.Impulse);
+            m_characterControllerScript.Rigidbody.AddRelativeForce(Vector3.back * RECOIL_FORCE, ForceMode.Impulse);
         }
     }
 
