@@ -5,14 +5,14 @@ using UnityEngine;
 public class PlayerCollision : MonoBehaviour
 {
     public CharacterControllerStateMachine m_characterControllerScript;
-    private float m_recoilForce = 5f;
+    private const float RECOIL_FORCE = 5f;
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             m_characterControllerScript.m_isHit = true;
             Debug.Log("Player is hit!");
-            m_characterControllerScript.Rigidbody.AddForce(Vector3.back * m_recoilForce, ForceMode.Impulse);
+            m_characterControllerScript.Rigidbody.AddForce(Vector3.back * RECOIL_FORCE, ForceMode.Impulse);
         }
     }
 
@@ -21,8 +21,6 @@ public class PlayerCollision : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             m_characterControllerScript.m_isHit = false;
-            Debug.Log("Player is hit!");
-            m_characterControllerScript.Rigidbody.AddForce(Vector3.back * m_recoilForce, ForceMode.Impulse);
         }
     }
 }

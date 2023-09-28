@@ -15,6 +15,7 @@ public class HitState : CharacterState
     {
         Debug.Log("Exit state: HitState\n");
         m_stateMachine.Animator.SetBool("IsHit", false);
+        m_stateMachine.m_isOnFloor = true;
         m_hitTimer = 0.5f;
     }
 

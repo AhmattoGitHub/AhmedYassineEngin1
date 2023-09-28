@@ -25,6 +25,8 @@ public class CharacterControllerStateMachine : MonoBehaviour
     public float JumpIntensity { get; private set; }
 
     public bool m_isHit;
+    public bool m_isOnFloor;
+    public bool m_isGettingUp;
     private void Awake()
     {
         m_possibleStates = new List<CharacterState>();
@@ -32,6 +34,7 @@ public class CharacterControllerStateMachine : MonoBehaviour
         m_possibleStates.Add(new JumpState());
         m_possibleStates.Add(new AttackingState());
         m_possibleStates.Add(new HitState());
+        m_possibleStates.Add(new OnGroundState());
     }
     // Start is called before the first frame update
     void Start()
