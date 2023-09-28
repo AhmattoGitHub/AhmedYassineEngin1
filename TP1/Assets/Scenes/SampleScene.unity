@@ -575,6 +575,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2601572194117694769, guid: 0dc921c0bf527aa4f8d706f9505f3b95,
         type: 3}
+      propertyPath: m_rotationSpeed
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 2601572194117694769, guid: 0dc921c0bf527aa4f8d706f9505f3b95,
+        type: 3}
+      propertyPath: m_rotationSpeedX
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 2601572194117694769, guid: 0dc921c0bf527aa4f8d706f9505f3b95,
+        type: 3}
       propertyPath: m_minCameraDistance
       value: 3
       objectReference: {fileID: 0}

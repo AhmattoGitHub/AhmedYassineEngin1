@@ -32,11 +32,11 @@ public class FreeState : CharacterState
         }
         if (Input.GetKey(KeyCode.D))
         {
-            m_stateMachine.Rigidbody.AddForce(new Vector3(1,0,0) * m_stateMachine.AccelerationValue, ForceMode.Acceleration);
+            m_stateMachine.Rigidbody.AddRelativeForce(new Vector3(1,0,0) * m_stateMachine.AccelerationValue, ForceMode.Acceleration);
         }
         if(Input.GetKey(KeyCode.A))
         {
-            m_stateMachine.Rigidbody.AddForce(new Vector3(-1, 0, 0) * m_stateMachine.AccelerationValue, ForceMode.Acceleration);
+            m_stateMachine.Rigidbody.AddRelativeForce(new Vector3(-1, 0, 0) * m_stateMachine.AccelerationValue, ForceMode.Acceleration);
         }
         if (m_stateMachine.Rigidbody.velocity.magnitude > m_stateMachine.MaxVelocity)
         {
