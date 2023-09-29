@@ -44,6 +44,19 @@ public class FreeState : CharacterState
             m_stateMachine.Rigidbody.velocity *= m_stateMachine.MaxVelocity;
         }
 
+        Vector3 cameraOrientation = m_stateMachine.Camera.transform.forward;
+        Vector3 playerOrientation = m_stateMachine.Rigidbody.transform.forward;
+
+        float rotationAngle = Vector3.Angle(vectorOnFloor, playerOrientation);
+
+        if(cameraOrientation.x < playerOrientation.x)
+        {
+            rotationAngle *= -1;
+        }
+
+        m_stateMachine.Rigidbody.transform.Rotate(0, rotationAngle, 0);
+        Debug.Log(rotationAngle);
+
         float forwardComponent = Vector3.Dot(m_stateMachine.Rigidbody.velocity, vectorOnFloor);
         float horizontalComponent = Input.GetAxis("Horizontal");
         m_stateMachine.UpdateFreeStateAnimatorValues(new Vector2(horizontalComponent, forwardComponent));
@@ -58,14 +71,9 @@ public class FreeState : CharacterState
 
     }
 
-    public override bool CanEnter(CharacterState currentState)
+    public override bool CanEnter()
     {
-        var jumpState = currentState as JumpState;
-        if(jumpState != null)
-        {
-            return m_stateMachine.IsInContactWithFloor();
-        }
-        return false;
+        return m_stateMachine.IsInContactWithFloor();
     }
 
     public override bool CanExit()

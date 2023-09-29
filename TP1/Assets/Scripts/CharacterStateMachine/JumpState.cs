@@ -29,7 +29,7 @@ public class JumpState : CharacterState
         m_currentStateTimer -= Time.deltaTime;
     }
 
-    public override bool CanEnter(CharacterState state)
+    public override bool CanEnter()
     {
         return Input.GetKeyDown(KeyCode.Space);
     }

@@ -30,7 +30,7 @@ public class CharacterState : IState
 
     }
 
-    public virtual bool CanEnter(CharacterState currentState)
+    public virtual bool CanEnter()
     {
         return true;
     }
