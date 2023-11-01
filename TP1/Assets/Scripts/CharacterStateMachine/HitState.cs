@@ -1,41 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HitState : CharacterState
 {
-    private float m_hitTimer = 0.5f;
+    private const float HIT_DURATION = 0.4f;
+    private float m_currentStateDuration;
+
     public override void OnEnter()
     {
+        m_currentStateDuration = HIT_DURATION;
+        m_stateMachine.OnHitStimuliReceived = false;
+        m_stateMachine.Animator.SetTrigger("OnHit");
         Debug.Log("Enter state: HitState\n");
-        m_stateMachine.Animator.SetBool("IsHit", true);
     }
 
     public override void OnExit()
     {
         Debug.Log("Exit state: HitState\n");
-        m_stateMachine.Animator.SetBool("IsHit", false);
-        m_stateMachine.m_isOnFloor = true;
-        m_hitTimer = 0.5f;
     }
 
     public override void OnFixedUpdate()
     {
-
+        m_stateMachine.FixedUpdateQuickDeceleration();
     }
 
     public override void OnUpdate()
     {
-        m_hitTimer -= Time.deltaTime;
+        m_currentStateDuration -= Time.deltaTime;
     }
 
-    public override bool CanEnter()
+    public override bool CanEnter(IState currentState)
     {
-        return m_stateMachine.m_isHit;
+        return m_stateMachine.OnHitStimuliReceived;
     }
 
     public override bool CanExit()
     {
-        return m_hitTimer <= 0;
+        return m_currentStateDuration < 0;
     }
 }

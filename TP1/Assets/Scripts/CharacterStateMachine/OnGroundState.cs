@@ -1,40 +1,51 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class OnGroundState : CharacterState
+public class GroundState : CharacterState
 {
-    private float m_getUpTimer = 2.0f;
+    private const float STUN_DURATION = 1.5f;
+    private float m_currentStateDuration;
+
     public override void OnEnter()
     {
+        m_stateMachine.OnStunStimuliReceived = false;
+        m_stateMachine.Animator.SetBool("IsStun", true);
+        m_currentStateDuration = STUN_DURATION;
 
+        Debug.Log("Enter state: GroundState\n");
     }
 
     public override void OnExit()
     {
-        m_stateMachine.Animator.SetBool("CanGetUp", true);
-        m_stateMachine.m_isOnFloor = false;
-        m_stateMachine.m_isGettingUp = true;
-        m_getUpTimer = 2.0f;
+        m_stateMachine.Animator.SetBool("IsStun", false);
+        Debug.Log("Exit state: GroundState\n");
     }
 
     public override void OnFixedUpdate()
     {
-
+        m_stateMachine.FixedUpdateQuickDeceleration();
     }
 
     public override void OnUpdate()
     {
-        m_getUpTimer -= Time.deltaTime;
+        m_currentStateDuration -= Time.deltaTime;
     }
 
-    public override bool CanEnter()
+    public override bool CanEnter(IState currentState)
     {
-        return m_stateMachine.m_isOnFloor;
+        return m_stateMachine.OnStunStimuliReceived;
+
     }
 
     public override bool CanExit()
     {
-        return m_getUpTimer <= 0;
+        return m_currentStateDuration < 0;
     }
+
+    private void FixedUpdateQuickDeceleration()
+    {
+        var oppositeDirectionForceToApply = -m_stateMachine.RB.velocity *
+        m_stateMachine.DecelerationValue * Time.fixedDeltaTime;
+        m_stateMachine.RB.AddForce(oppositeDirectionForceToApply, ForceMode.Acceleration);
+    }
+
 }

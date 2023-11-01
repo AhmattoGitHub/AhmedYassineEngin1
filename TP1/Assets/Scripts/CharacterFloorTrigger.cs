@@ -1,27 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterFloorTrigger : MonoBehaviour
 {
     public bool IsOnFloor { get; private set; }
 
-    private void Awake()
-    {
-        
-    }
     private void OnTriggerStay(Collider other)
     {
-        if(!IsOnFloor)
+        if (!IsOnFloor)
         {
-            Debug.Log("Started touching floor");
+            Debug.Log("Touching the floor");
         }
         IsOnFloor = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("Started leaving floor");
+        Debug.Log("Left the floor");
         IsOnFloor = false;
     }
 }

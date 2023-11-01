@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class FreeState : CharacterState
@@ -10,69 +7,63 @@ public class FreeState : CharacterState
         Debug.Log("Enter state: FreeState\n");
     }
 
+    public override void OnUpdate()
+    {
+    }
+
+    public override void OnFixedUpdate()
+    {
+        FixedUpdateRotateWithCamera();
+
+        if (m_stateMachine.CurrentDirectionalInputs == Vector2.zero)
+        {
+            FixedUpdateQuickDeceleration();
+            return;
+        }
+
+        ApplyMovementsOnFloorFU(m_stateMachine.CurrentDirectionalInputs);
+    }
+
+
+    private void ApplyMovementsOnFloorFU(Vector2 inputVector2)
+    {
+        //TODO MF: Explications nécessaires de ce code pour les élèves
+        var vectorOnFloor = Vector3.ProjectOnPlane(m_stateMachine.Camera.transform.forward * inputVector2.y, Vector3.up);
+        vectorOnFloor += Vector3.ProjectOnPlane(m_stateMachine.Camera.transform.right * inputVector2.x, Vector3.up);
+        vectorOnFloor.Normalize();
+
+        m_stateMachine.RB.AddForce(vectorOnFloor * m_stateMachine.AccelerationValue, ForceMode.Acceleration);
+
+        var currentMaxSpeed = m_stateMachine.GetCurrentMaxSpeed();
+
+        if (m_stateMachine.RB.velocity.magnitude > currentMaxSpeed)
+        {
+            m_stateMachine.RB.velocity = m_stateMachine.RB.velocity.normalized;
+            m_stateMachine.RB.velocity *= currentMaxSpeed;
+        }
+    }
+
+    private void FixedUpdateQuickDeceleration()
+    {
+        var oppositeDirectionForceToApply = -m_stateMachine.RB.velocity *
+        m_stateMachine.DecelerationValue * Time.fixedDeltaTime;
+        m_stateMachine.RB.AddForce(oppositeDirectionForceToApply, ForceMode.Acceleration);
+    }
+
+    private void FixedUpdateRotateWithCamera()
+    {
+        var forwardCamOnFloor = Vector3.ProjectOnPlane(m_stateMachine.Camera.transform.forward, Vector3.up);
+        m_stateMachine.RB.transform.LookAt(forwardCamOnFloor + m_stateMachine.RB.transform.position);
+    }
+
     public override void OnExit()
     {
         Debug.Log("Exit state: FreeState\n");
     }
 
-    public override void OnFixedUpdate() 
+    public override bool CanEnter(IState currentState)
     {
-        var vectorOnFloor = Vector3.ProjectOnPlane(m_stateMachine.Camera.transform.forward, Vector3.up);
-        vectorOnFloor.Normalize();
-
-        if (Input.GetKey(KeyCode.W))
-        {
-            m_stateMachine.Rigidbody.AddForce(vectorOnFloor * m_stateMachine.AccelerationValue, ForceMode.Acceleration);
-
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            m_stateMachine.Rigidbody.AddForce(-vectorOnFloor * m_stateMachine.AccelerationValue, ForceMode.Acceleration);
-
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            m_stateMachine.Rigidbody.AddRelativeForce(new Vector3(1,0,0) * m_stateMachine.AccelerationValue, ForceMode.Acceleration);
-        }
-        if(Input.GetKey(KeyCode.A))
-        {
-            m_stateMachine.Rigidbody.AddRelativeForce(new Vector3(-1, 0, 0) * m_stateMachine.AccelerationValue, ForceMode.Acceleration);
-        }
-        if (m_stateMachine.Rigidbody.velocity.magnitude > m_stateMachine.MaxVelocity)
-        {
-            m_stateMachine.Rigidbody.velocity = m_stateMachine.Rigidbody.velocity.normalized;
-            m_stateMachine.Rigidbody.velocity *= m_stateMachine.MaxVelocity;
-        }
-
-        Vector3 cameraOrientation = m_stateMachine.Camera.transform.forward;
-        Vector3 playerOrientation = m_stateMachine.Rigidbody.transform.forward;
-
-        float rotationAngle = Vector3.Angle(vectorOnFloor, playerOrientation);
-
-        if(cameraOrientation.x < playerOrientation.x)
-        {
-            rotationAngle *= -1;
-        }
-
-        m_stateMachine.Rigidbody.transform.Rotate(0, rotationAngle, 0);
-        Debug.Log(rotationAngle);
-
-        float forwardComponent = Vector3.Dot(m_stateMachine.Rigidbody.velocity, vectorOnFloor);
-        float horizontalComponent = Input.GetAxis("Horizontal");
-        m_stateMachine.UpdateFreeStateAnimatorValues(new Vector2(horizontalComponent, forwardComponent));
-        //TODO
-        //Add movements in all directions
-        //Have different max speeds on the sides and front/behind
-        //When no input is being entered, make the character decelerate quickly
-    }
-
-    public override void OnUpdate()
-    {
-
-    }
-
-    public override bool CanEnter()
-    {
+        //Je ne peux entrer dans le FreeState que si je touche le sol
         return m_stateMachine.IsInContactWithFloor();
     }
 

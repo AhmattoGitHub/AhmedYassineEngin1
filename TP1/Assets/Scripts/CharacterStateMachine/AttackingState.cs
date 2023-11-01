@@ -1,41 +1,43 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class AttackingState : CharacterState
 {
-    private float m_attackTimer = 0.1f;
-    public override bool CanEnter()
-    {
-        return Input.GetMouseButtonDown(0);
-    }
-
-    public override bool CanExit()
-    {
-        return m_attackTimer <= 0f;
-    }
+    private const float ATTACK_DURATION = 0.6f;
+    private float m_currentStateDuration;
 
     public override void OnEnter()
     {
-        Debug.Log("Enter state: Attacking");
-        m_stateMachine.Animator.SetBool("IsAttacking", true);
+        m_stateMachine.Animator.SetTrigger("Attacks");
+        m_currentStateDuration = ATTACK_DURATION;
+        Debug.Log("Enter state: AttackingState\n");
     }
 
     public override void OnExit()
     {
-        Debug.Log("Exit state: Attacking");
-        m_attackTimer = 1f;
-        m_stateMachine.Animator.SetBool("IsAttacking", false);
+        Debug.Log("Exit state: AttackingState\n");
     }
 
     public override void OnFixedUpdate()
     {
-
+        m_stateMachine.FixedUpdateQuickDeceleration();
     }
 
     public override void OnUpdate()
     {
-        m_attackTimer -= Time.deltaTime;
+        m_currentStateDuration -= Time.deltaTime;
+    }
+
+    public override bool CanEnter(IState currentState)
+    {
+        if (currentState is FreeState)
+        {
+            return Input.GetKeyDown(KeyCode.Mouse0);
+        }
+        return false;
+    }
+
+    public override bool CanExit()
+    {
+        return m_currentStateDuration < 0;
     }
 }
