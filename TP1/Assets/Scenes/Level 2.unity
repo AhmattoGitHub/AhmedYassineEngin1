@@ -289,7 +289,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 215110602}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.019575173, y: 0.93953735, z: -0.054491036, w: 0.33751622}
+  m_LocalRotation: {x: -0.0051176515, y: 0.99441516, z: -0.05767375, w: -0.08823895}
   m_LocalPosition: {x: 99.98877, y: 11.763173, z: 35.406364}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -723,6 +723,8 @@ PlayableDirector:
   m_SceneBindings:
   - key: {fileID: 7094936073789149599, guid: 27a58ac4d8fd9f541a1023c04e88b9fd, type: 2}
     value: {fileID: 295098671}
+  - key: {fileID: 315964091865628868, guid: 27a58ac4d8fd9f541a1023c04e88b9fd, type: 2}
+    value: {fileID: 215110602}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &648168473
@@ -735,6 +737,37 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -4.6566123e-10, w: 1}
   m_LocalPosition: {x: -0.000022888184, y: -0, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &709117635
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 709117636}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &709117636
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 709117635}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 94.57154, y: 14.783476, z: 43.501316}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2603,3 +2636,4 @@ SceneRoots:
   - {fileID: 295098674}
   - {fileID: 215110607}
   - {fileID: 648168473}
+  - {fileID: 709117636}
