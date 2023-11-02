@@ -78,9 +78,6 @@ public class CharacterControllerStateMachine : BaseStateMachine<CharacterState>,
 
     private void UpdateAnimatorValues()
     {
-        //Aller chercher ma vitesse actuelle
-        //Communiquer directement avec mon Animator
-
         Animator.SetFloat("MoveX", CurrentRelativeVelocity.x / GetCurrentMaxSpeed());
         Animator.SetFloat("MoveY", CurrentRelativeVelocity.y / GetCurrentMaxSpeed());
         Animator.SetBool("TouchGround", m_floorTrigger.IsOnFloor);
