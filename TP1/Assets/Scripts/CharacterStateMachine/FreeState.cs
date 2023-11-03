@@ -27,7 +27,6 @@ public class FreeState : CharacterState
 
     private void ApplyMovementsOnFloorFU(Vector2 inputVector2)
     {
-        //TODO MF: Explications nécessaires de ce code pour les élèves
         var vectorOnFloor = Vector3.ProjectOnPlane(m_stateMachine.Camera.transform.forward * inputVector2.y, Vector3.up);
         vectorOnFloor += Vector3.ProjectOnPlane(m_stateMachine.Camera.transform.right * inputVector2.x, Vector3.up);
         vectorOnFloor.Normalize();

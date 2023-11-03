@@ -9,7 +9,7 @@ public class JumpState : CharacterState
     public override void OnEnter()
     {
         Debug.Log("Enter state: JumpState\n");
-
+        PlayerAudioManager.Instance.PlayJumpSound();
         //Effectuer le saut
         m_stateMachine.RB.AddForce(Vector3.up * m_stateMachine.JumpIntensity, ForceMode.Acceleration);
         m_currentStateTimer = STATE_EXIT_TIMER;

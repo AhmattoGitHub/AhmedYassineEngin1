@@ -1,7 +1,6 @@
 public abstract class CharacterState : IState
 {
     protected CharacterControllerStateMachine m_stateMachine;
-
     public void OnStart()
     {
         throw new System.NotImplementedException();

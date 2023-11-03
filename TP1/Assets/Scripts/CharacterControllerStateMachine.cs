@@ -121,8 +121,6 @@ public class CharacterControllerStateMachine : BaseStateMachine<CharacterState>,
     {
         CurrentDirectionalInputs = Vector2.zero;
 
-        //Pourquoi est-ce que cette méthode s'appelle Get même si elle n'a pas de valeur de retour?
-        // Ce n'est pas une erreur!
         if (Input.GetKey(KeyCode.W))
         {
             CurrentDirectionalInputs += Vector2.up;

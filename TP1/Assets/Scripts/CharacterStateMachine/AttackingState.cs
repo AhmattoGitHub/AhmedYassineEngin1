@@ -9,6 +9,7 @@ public class AttackingState : CharacterState
     {
         m_stateMachine.Animator.SetTrigger("Attacks");
         m_currentStateDuration = ATTACK_DURATION;
+        PlayerAudioManager.Instance.PlayHitSound();
         Debug.Log("Enter state: AttackingState\n");
     }
 
