@@ -10,6 +10,7 @@ public class GroundState : CharacterState
         m_stateMachine.OnStunStimuliReceived = false;
         m_stateMachine.Animator.SetBool("IsStun", true);
         PlayerAudioManager.Instance.PlayHitSound();
+        ParticleManager.Instance.SpawnExplosion();
         m_currentStateDuration = STUN_DURATION;
 
         Debug.Log("Enter state: GroundState\n");

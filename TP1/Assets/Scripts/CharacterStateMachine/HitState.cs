@@ -10,6 +10,7 @@ public class HitState : CharacterState
         m_currentStateDuration = HIT_DURATION;
         m_stateMachine.OnHitStimuliReceived = false;
         PlayerAudioManager.Instance.PlayHitSound();
+        ParticleManager.Instance.SpawnExplosion();
         m_stateMachine.Animator.SetTrigger("OnHit");
         Debug.Log("Enter state: HitState\n");
     }
